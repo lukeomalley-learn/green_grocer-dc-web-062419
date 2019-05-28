@@ -16,6 +16,7 @@ end
 
 def apply_coupons(cart, coupons)
   coupons.each do |coupon_hash|
+<<<<<<< HEAD
     if cart.has_key?(coupon_hash[:item]) && cart[coupon_hash[:item]][:count] >= coupon_hash[:num]
       if cart.has_key?("#{coupon_hash[:item]} W/COUPON") && cart[coupon_hash[:item]][:count] >= coupon_hash[:num]
         cart["#{coupon_hash[:item]} W/COUPON"][:count] += 1
@@ -26,6 +27,11 @@ def apply_coupons(cart, coupons)
       end
     end
     
+=======
+    if cart.has_key?(coupon_hash[:item])
+      cart["#{coupon_hash[:item]} W/COUPON"] = {:price => coupon_hash[:cost], :clearance => cart[coupon_hash[:item]][:clearance], :count => 1}
+    end
+>>>>>>> 0124d4775a237055319148b1768d2db5456baf5f
   end
   return cart
 end
@@ -58,6 +64,7 @@ end
 cart = [
   {"AVOCADO" => {:price => 3.0, :clearance => true }},
   {"AVOCADO" => {:price => 3.0, :clearance => true }},
+<<<<<<< HEAD
   {"AVOCADO" => {:price => 3.0, :clearance => true }},
   {"AVOCADO" => {:price => 3.0, :clearance => true }},
   {"AVOCADO" => {:price => 3.0, :clearance => true }}
@@ -67,3 +74,15 @@ coupons = [
       {:item => "AVOCADO", :num => 2, :cost => 5.00},
       {:item => "AVOCADO", :num => 2, :cost => 5.00}
     ]
+=======
+  {"KALE"    => {:price => 3.0, :clearance => false}}
+]
+cart = consolidate_cart(cart)
+coupons = [
+      {:item => "AVOCADO", :num => 2, :cost => 5.00},
+      {:item => "BEER", :num => 2, :cost => 20.00},
+      {:item => "CHEESE", :num => 3, :cost => 15.00}
+    ]
+    
+puts apply_coupons(cart, coupons)
+>>>>>>> 0124d4775a237055319148b1768d2db5456baf5f
